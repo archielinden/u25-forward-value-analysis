@@ -8,9 +8,7 @@ R • ggplot2 • ggrepel • Linear Regression • Data Visualisation
 
 Which U25 forwards in Europe’s top five leagues offer the strongest attacking performance relative to their market value?
 
-The aim of this project is to identify young forwards who combine strong attacking output with a market valuation that appears low relative to comparable players.
-
-Rather than simply ranking the cheapest players, the analysis combines attacking performance with a regression-based estimate of market value to highlight players who perform strongly while also appearing relatively undervalued.
+The aim of this project is to identify young forwards who combine strong attacking output with a market valuation that appears low relative to comparable players. Rather than simply ranking the cheapest players, the analysis combines attacking performance with a regression-based estimate of market value to highlight players who perform strongly while also appearing relatively undervalued.
 
 
 ## Data
