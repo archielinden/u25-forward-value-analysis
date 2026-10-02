@@ -172,16 +172,17 @@ Team context is another factor. A forward playing for a dominant side may natura
 Finally, the **60/40 weighting** is a modelling choice rather than an objectively correct formula. I chose it because I wanted attacking performance to matter more than simply being cheap. A different analyst could reasonably place more or less emphasis on either side.
 
 
-## Final thoughts
+## Final thoughts - From data to recruitment
 
-The main thing I took from the project is that there is no single type of value player.
+This is still a relatively simple analysis of young forwards. It uses a limited set of attacking metrics and cannot capture everything that determines whether a player will succeed at a new club. Even so, it provides a useful foundation for identifying players worth investigating further.
 
-Carlos Espí stands out because his valuation is extremely low relative to his age and production. Šulc and Matanović offer a more balanced combination of strong performance and affordability. Diomandé and El Mala are already expensive, but their output is strong enough that they still compare favourably with their current valuations.
+The subsequent transfer market provides some support for that. Several players highlighted by the analysis went on to earn major moves, attract substantial bids or receive increased interest from leading European clubs. That does not mean the model predicted those transfers, but it suggests that some of the same underlying performances identified here were also being noticed in the wider recruitment market.
 
-That is closer to what I wanted the model to do than simply producing a list of cheap forwards.
+There is also plenty of scope to take the analysis further. Adding more detailed attacking metrics — such as progressive carries, touches in the penalty area, shot-creating actions, pressing data and measures of chance quality — could give a much fuller picture of each player's style and potentially improve how closely the model reflects the way clubs evaluate young forwards.
 
-The ranking gives me a smaller group of players who look interesting for different reasons. From there, the sensible next step would be to look more closely at the individual players, their roles, the context behind their numbers and whether their style would actually suit the club looking at them.
+Ultimately, though, the data should be the starting point rather than the final decision. Once a shortlist has been created, the next step is to understand the context behind the numbers. Would the player suit the tactical system of the club recruiting them? Do they have the work rate and attitude required? Are their numbers sustainable, or were they produced by one unusually strong season? And, most importantly, is there evidence that the player can continue developing rather than having already reached their current level?
 
+That is where scouting and data analysis work best together. Statistics can reduce a large pool of players to a much more manageable shortlist and highlight names that might otherwise be overlooked. From there, detailed scouting can determine whether the numbers represent a genuine recruitment opportunity — or simply an impressive season.
 
 ## Data and code
 
