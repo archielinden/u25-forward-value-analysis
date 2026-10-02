@@ -1,221 +1,195 @@
 # U25 Forward Value Analysis
 
-## Tools
-
-R • ggplot2 • ggrepel • Linear Regression • Data Visualisation
-
-## Question
+## Identifying Value Among U25 Forwards
 
 Which U25 forwards in Europe’s top five leagues offer the strongest attacking performance relative to their market value?
 
-The aim of this project is to identify young forwards who combine strong attacking output with a market valuation that appears low relative to comparable players. Rather than simply ranking the cheapest players, the analysis combines attacking performance with a regression-based estimate of market value to highlight players who perform strongly while also appearing relatively undervalued.
+That sounds simple, but there are two different things to consider. A player can be cheap without actually representing particularly good value, while an already expensive player could still look undervalued if their performances justify an even higher valuation.
+
+I wanted to build a model that considered both sides. The aim was not to decide who a club should sign, but to narrow a large group of young forwards into players whose performances and current valuations made them worth looking at more closely.
 
 
-## Data
+## Building the Sample
 
-The analysis uses 2025/26 player data from Europe’s top five leagues:
+The analysis uses full-season 2025/26 data from the Premier League, LaLiga, Bundesliga, Serie A and Ligue 1.
 
-- Premier League
-- LaLiga
-- Bundesliga
-- Serie A
-- Ligue 1
+I restricted the sample to players under 25 who played at least 900 minutes. This removes players whose numbers were built on very small samples while still allowing younger players who were not necessarily guaranteed starters to be included.
 
-Full-season performance data was taken from the [Top 5 Football Dataset](https://github.com/m-mahadi/top5-football-dataset), which combines data from sources including FBref, Understat and SofaScore.
+I also limited the analysis to players whose primary position was listed as forward. Players classified as `FW` or `FW,MF` were included, while players listed as `MF,FW` were excluded.
 
-SofaScore performance metrics were used throughout the analysis to maintain a consistent source across goals, assists, expected goals, expected assists, shots and minutes played.
+This is useful for keeping the sample consistent, although it inevitably leaves out a few interesting players. Pablo Pagis, who recently earned a move to Paris FC is a good example. He was classified primarily as a midfielder and therefore falls outside the model, but his raw attacking numbers still make him someone I would want to look at separately. Cases like this are a useful reminder that a positional label should not completely replace actually looking at the player.
 
-Market values were taken from a separate SofaScore-derived player profile dataset.
-
-The analysis focuses on players aged under 25 who played at least 900 minutes during the 2025/26 season.
-
-Players were also required to have been primarily classified as forwards. Players listed as `FW` or `FW,MF` were included, while players listed as `MF,FW` were excluded. This keeps the sample focused on players who operated predominantly as forwards during the season, even if some also played in midfield.
-
-After matching market values and removing duplicate player entries, the final sample contained **85 players**.
+After matching the performance data to the market-value data and removing players without usable valuations, the final sample contained **85 players**.
 
 
-## Method
+## Measuring Attacking Performance
 
-### Attacking Performance
+I did not want the performance ranking to simply become a list of the highest goalscorers.
 
-Six attacking metrics were converted to per-90 values:
-
-- Goals
-- Expected goals (xG)
-- Assists
-- Expected assists (xA)
-- Shots
-- Shot accuracy
-
-Each metric was standardised using a z-score so that metrics measured on different scales could be compared directly.
-
-To reduce the effect of closely related statistics being counted multiple times, the metrics were grouped into three components.
-
-**Scoring**
+Six attacking measures were used:
 
 - Goals per 90
-- xG per 90
-
-**Creation**
-
+- Expected goals per 90
 - Assists per 90
-- xA per 90
-
-**Shooting**
-
+- Expected assists per 90
 - Shots per 90
 - Shot accuracy
 
-The two metrics within each component were given equal weight, before the three components were averaged to create an overall **Attacking Performance Score**.
+Each metric was standardised relative to the other 84 players in the sample. They were then split into three areas: scoring, creation and shooting. **Scoring** combines goals and expected goals, **creation** combines assists and expected assists, while **shooting** combines shot volume and shot accuracy. The three components were weighted equally to produce one overall **Attacking Performance Score**.
 
-A score of approximately zero represents average attacking performance within the 85-player sample. Positive values indicate above-average performance, while negative values indicate below-average performance.
+Using expected as well as actual output is important here. Eleven goals can come from consistently getting into good shooting positions or from an unusually strong run of finishing. Including xG helps distinguish between the two, while the creation and shooting components prevent the score from being entirely centred around goals.
 
 
-## Market Value Model
+## Estimating Market Value
 
-A linear regression model was used to estimate each player's expected market value based on:
+Once each player had an attacking performance score, I wanted to estimate what level of market value would normally be associated with that sort of profile.
+
+I used a linear regression based on:
 
 - Attacking Performance Score
 - Age
 - League
 - Minutes played
 
-Market value was log-transformed because player valuations are highly right-skewed.
+Market value was log-transformed because football valuations are heavily skewed. Most players sit towards the lower end of the market, while a much smaller number are worth tens of millions more.
 
-The model was:
+The model explained **62.5% of the variation in log market values**, meaning that performance, age, league and minutes together accounted for a substantial share of the differences in valuations across the sample. This should not be interpreted as 62.5% predictive accuracy, but it suggests the model captures a meaningful part of how players are valued.
 
-`log(Market Value) = Performance + Age + League + log(Minutes Played)`
+The individual results were broadly intuitive. Better attacking performance was associated with higher valuations, while younger players tended to carry a premium within the U25 sample. The clearest league effect came from the **Premier League**, where comparable players carried substantially higher valuations. That is not particularly surprising given its financial strength and its reputation as one of the strongest and most competitive domestic leagues in world football.
 
-The model explained **62.5% of the variation in log market values**, with an adjusted R² of **59.1%**.
-
-Attacking performance was strongly associated with market value. The coefficient on the Attacking Performance Score was **0.917** and statistically significant at the 1% level.
-
-Age also had a statistically significant negative coefficient within the U25 sample, indicating that, after controlling for performance, league and minutes, younger players tended to carry higher valuations.
-
-The Premier League also had a large positive coefficient relative to the Bundesliga reference category, reflecting the substantially higher valuations attached to comparable players in the Premier League within this sample.
-
-The regression is not intended to produce a definitive transfer valuation. Instead, it provides a benchmark against which each player's existing market value can be compared.
+I then used the regression as a benchmark rather than treating its estimate as a player's "true" value. The interesting players were those whose actual market value sat below what the model would normally expect from a similar profile.
 
 
-## Model-Implied Undervaluation
+## From undervaluation to a final ranking
 
-The regression residual was used to measure relative valuation.
+There was one problem with simply ranking the regression residuals.
 
-A player whose actual market value was below the value implied by the model received a positive **Undervaluation Score**.
+Some relatively weak performers looked heavily undervalued because their market values were particularly low. Mathematically that made sense, but it was not really what I wanted from a recruitment shortlist. Being cheap is not particularly useful if the attacking performance is not strong enough in the first place.
 
-This allows the analysis to distinguish between a player who is simply inexpensive and a player who appears inexpensive relative to their age, league, minutes and attacking performance.
+I therefore converted both attacking performance and model-implied undervaluation into percentile rankings and combined them into a final score:
 
-For displaying predicted values in euros, a smearing adjustment was applied when converting predictions from the logarithmic scale back to the original market-value scale.
+**60% attacking performance + 40% model-implied undervaluation**
 
+The performance percentile was squared before entering the score. This gives extra weight to players towards the top of the attacking distribution, rather than treating the difference between the 90th and 80th percentile in the same way as the difference between the 50th and 40th.
 
-## Final Value Score
+Only players whose actual value was below the level implied by the regression were eligible for the final shortlist.
 
-Ranking players purely by model-implied undervaluation can favour players whose market values are low but whose attacking output is also relatively weak. For example, some players appeared highly undervalued by the regression despite recording below-average attacking performance within the sample. To prevent the final ranking from simply rewarding cheap players, attacking performance was given greater importance. Each player's performance and undervaluation were converted into percentile ranks.
-
-The final score was calculated as:
-
-**Final Value Score = 60% Performance + 40% Model-Implied Undervaluation**
-
-The performance percentile was squared before being included in the final score. This gives additional weight to players towards the top of the attacking performance distribution rather than treating small differences across the entire ranking equally. Only players whose actual market value was below the regression estimate were included in the final shortlist. The weighting was fixed before reviewing the final ranking rather than being adjusted to favour particular players.
-
+The 60/40 split is ultimately a modelling choice, but I fixed it before looking at the final rankings rather than changing the weights afterwards to produce particular players.
 
 ## Results
 
-The final ranking produced the following top 15:
-
-| Rank | Player | Age | League | Market Value | Model Value | Performance Score | Final Score |
-|---|---|---:|---|---:|---:|---:|---:|
-| 1 | Pavel Šulc | 24 | Ligue 1 | €12.4m | €23.4m | 0.715 | 0.809 |
-| 2 | Carlos Espí | 20 | LaLiga | €2.7m | €21.6m | 0.604 | 0.795 |
-| 3 | Benjamin Šeško | 22 | Premier League | €68.0m | €111.1m | 0.702 | 0.764 |
-| 4 | Igor Matanović | 22 | Bundesliga | €6.8m | €22.6m | 0.599 | 0.760 |
-| 5 | Yan Diomandé | 18 | Bundesliga | €49.0m | €61.5m | 1.049 | 0.757 |
-| 6 | Said El Mala | 18 | Bundesliga | €41.0m | €50.0m | 0.911 | 0.721 |
-| 7 | Christian Kofane | 19 | Bundesliga | €23.0m | €31.5m | 0.686 | 0.704 |
-| 8 | Sambou Soumano | 24 | Ligue 1 | €4.2m | €14.3m | 0.372 | 0.690 |
-| 9 | Joaquín Panichelli | 22 | Ligue 1 | €23.0m | €30.8m | 0.655 | 0.671 |
-| 10 | Folarin Balogun | 24 | Ligue 1 | €20.0m | €25.1m | 0.661 | 0.659 |
-| 11 | Igor Thiago | 24 | Premier League | €52.0m | €92.2m | 0.479 | 0.655 |
-| 12 | Dženan Pejčinović | 20 | Bundesliga | €6.6m | €19.7m | 0.234 | 0.627 |
-| 13 | Álvaro Rodríguez | 21 | LaLiga | €4.6m | €15.6m | 0.188 | 0.619 |
-| 14 | Emersonn | 21 | Ligue 1 | €3.9m | €19.0m | 0.148 | 0.611 |
-| 15 | Gift Orban | 23 | Serie A | €8.9m | €19.9m | 0.194 | 0.590 |
-
-
-## Attacking Performance vs Market Value
+### Performance and market value
 
 ![Attacking Performance vs Market Value](performance_vs_market_value.png)
 
-The graph compares attacking performance with estimated market value across the full sample.
+The first graph shows the trade-off I was looking for. Players further to the right produced stronger attacking performances, while those lower down had lower market values. The most interesting area is therefore broadly towards the lower-right, where strong output meets a relatively low valuation.
 
-Players further to the right recorded stronger attacking performance, while players lower on the graph had lower market values. This makes the lower-right area particularly interesting when looking for potential recruitment value.
+Carlos Espí and Igor Matanović stand out immediately on that basis, while Pavel Šulc also combines strong attacking numbers with a much lower valuation than several players around him. At the other end, Yan Diomandé and Said El Mala were among the strongest performers in the entire sample, but already carried much higher market values.
 
-**Pavel Šulc** stands out as one of the clearest combinations of the two. His attacking performance was around the 89th percentile of the sample, while his €12.4m market value remained well below several players with similar or weaker output.
-
-**Carlos Espí** presents an even more extreme value case. He combined an above-average attacking performance score with a market value of just €2.7m, making him one of the cheapest high-performing forwards in the sample.
-
-**Igor Matanović** shows a similar pattern at €6.8m, combining strong attacking output with a relatively modest valuation.
-
-At the other end of the price range, players such as **Yan Diomandé** and **Said El Mala** rank highly mainly because of their exceptional attacking performance. They are already considerably more expensive, meaning their case is based less on being cheap and more on the strength of their output.
+This is useful as a first look, but price and performance alone do not tell the whole story. A €20m player in one league or at one age may not be directly comparable with a €20m player elsewhere, which is where the market-value model becomes more useful.
 
 
-## Actual vs Model-Predicted Market Value
+### Who looks undervalued?
 
 ![Actual vs Model-Predicted Market Value](actual_vs_predicted_market_value.png)
 
-The second graph compares each player's actual market value with the value implied by the regression model.
+The second graph compares each player's actual market value with the value implied by the regression. Players above the dashed line are valued below the level expected by the model, while players below it are valued above it.
 
-The dashed line represents equal actual and model-predicted values. Players above the line are valued below the level implied by the model, while players below it are valued above that level.
+Carlos Espí is the clearest example. His listed value is extremely low relative to what the model would expect from a player of his age, playing time and attacking output. Matanović, Šulc and several of the lower-cost forwards also sit noticeably above the line.
 
-**Carlos Espí** produces the largest model-implied valuation gap in the sample, with an actual value of just €2.7m despite his age, playing time and attacking performance.
-
-**Igor Matanović** and **Pavel Šulc** also sit clearly above the line, supporting their high positions in the final ranking.
-
-The graph also demonstrates why an expensive player can still appear relatively undervalued. **Igor Thiago**, for example, has a market value of €52m, but his performance and other characteristics cause the model to place him substantially higher.
-
-This is therefore a measure of **relative value**, rather than simply a search for low-cost players.
+Importantly, though, being a long way above the line does not automatically make someone one of the strongest options. A player can look heavily undervalued partly because they are very cheap, even if their attacking performance is only average. That is why I did not use the regression residual alone for the final ranking.
 
 
-## Final Ranking
+### Bringing performance and value together
 
 ![Top 15 U25 Forward Value Rankings](top15_value_ranking.png)
 
-The final ranking combines the two sides of the analysis.
+Once attacking performance and model-implied undervaluation are combined, **Pavel Šulc comes out on top**.
 
-**Pavel Šulc ranks first** because he offers one of the strongest overall combinations of attacking performance and model-implied undervaluation.
+He scored 11 league goals in only 1,568 minutes and ranked around the 89th percentile for attacking performance, while his €12.4m market value remained well below the €23.4m level implied by the model. He did not rank first because of one particularly extreme metric, but because he performed strongly on both sides of the analysis.
 
-**Carlos Espí ranks second**, driven by the strongest undervaluation signal in the sample while still producing strong attacking output.
+**Carlos Espí finishes narrowly behind him** and is probably the most striking low-cost name in the results. At 20 years old he scored 11 goals in 1,350 minutes, around 0.73 goals per 90, while carrying a listed value of only €2.7m. The €21.6m model estimate should not be read as a literal transfer fee, but the size of the gap shows how unusual his combination of age, output and valuation was within the sample.
 
-Players such as **Benjamin Šeško, Yan Diomandé and Said El Mala** rank highly because their attacking performance is among the strongest in the sample, even though their existing valuations are considerably higher.
+**Igor Matanović** offers a similar profile. He also scored 11 goals, doing so in 1,570 minutes, while being valued at €6.8m. Strong scoring and expected-goal numbers combined with that relatively low price pushed him to fourth overall.
 
-Meanwhile, players including **Matanović, Soumano, Pejčinović, Álvaro Rodríguez and Emersonn** receive a larger contribution from the value side of the ranking.
+The ranking also shows why this is not simply a bargain-hunting model. **Benjamin Šeško, Yan Diomandé and Said El Mala** already have high valuations, but their attacking output was strong enough for them to remain near the top. Diomandé scored 12 league goals and El Mala 13, despite both being only 18.
 
-The result is a shortlist containing different types of potential recruitment targets rather than simply the fifteen cheapest or fifteen highest-performing players.
+Further down, **Joaquín Panichelli scored 16 league goals**, while **Igor Thiago scored 22**, the highest total among the final top 15. Thiago was already valued at €52m, but his performance was strong enough for the model to still view that as relatively low compared with his profile.
+
+The final ranking therefore contains a few different types of player. Some stand out because they combine strong output with a genuinely low valuation, while others are already expensive but still look relatively well priced given how well they performed.
 
 
-## Conclusion
+## Final top 15
 
-This analysis provides a simple data-led approach to identifying potential recruitment value among young forwards.
+| Rank | Player | Age | League | Goals | Market Value | Model Value |
+|---|---|---:|---|---:|---:|---:|
+| 1 | Pavel Šulc | 24 | Ligue 1 | 11 | €12.4m | €23.4m |
+| 2 | Carlos Espí | 20 | LaLiga | 11 | €2.7m | €21.6m |
+| 3 | Benjamin Šeško | 22 | Premier League | 11 | €68.0m | €111.1m |
+| 4 | Igor Matanović | 22 | Bundesliga | 11 | €6.8m | €22.6m |
+| 5 | Yan Diomandé | 18 | Bundesliga | 12 | €49.0m | €61.5m |
+| 6 | Said El Mala | 18 | Bundesliga | 13 | €41.0m | €50.0m |
+| 7 | Christian Kofane | 19 | Bundesliga | 5 | €23.0m | €31.5m |
+| 8 | Sambou Soumano | 24 | Ligue 1 | 4 | €4.2m | €14.3m |
+| 9 | Joaquín Panichelli | 22 | Ligue 1 | 16 | €23.0m | €30.8m |
+| 10 | Folarin Balogun | 24 | Ligue 1 | 13 | €20.0m | €25.1m |
+| 11 | Igor Thiago | 24 | Premier League | 22 | €52.0m | €92.2m |
+| 12 | Dženan Pejčinović | 20 | Bundesliga | 8 | €6.6m | €19.7m |
+| 13 | Álvaro Rodríguez | 21 | LaLiga | 7 | €4.6m | €15.6m |
+| 14 | Emersonn | 21 | Ligue 1 | 6 | €3.9m | €19.0m |
+| 15 | Gift Orban | 23 | Serie A | 7 | €8.9m | €19.9m |
 
-The results suggest that strong value can appear in different forms. Some players, such as Pavel Šulc and Igor Matanović, combine strong attacking performance with relatively modest valuations. Carlos Espí stands out because of the size of the gap between his existing market value and the value implied by the model.
+The model values shown here are best treated as reference points rather than suggested transfer fees. Their purpose is to show the level at which the regression would expect a player with that profile to be valued.
 
-Other players, such as Yan Diomandé and Said El Mala, are already expensive but remain attractive within the ranking because of the strength of their attacking output.
 
-The model should therefore be viewed as a **screening tool** rather than a definitive recruitment model. Its main purpose is to narrow a large group of players into a smaller set whose performance and valuation may justify further investigation.
+## How does it compare with the real market?
+
+A useful final check is whether some of the players highlighted by the model have also started attracting greater attention in the real transfer market.
+
+**[Add examples here of players from the analysis who later earned significant moves, attracted major interest or saw their valuations rise.]**
+
+I would not treat that as proof that the model has correctly predicted their careers. Clubs have access to far more information than is included here and transfers depend on factors such as contracts, tactical fit, negotiations and the needs of individual teams.
+
+Still, if players highlighted by a relatively simple data model are also beginning to attract stronger interest in the real market, it gives some reassurance that the analysis is picking up genuine signals rather than producing a completely artificial ranking.
 
 
 ## Limitations
 
-There are several important limitations to the analysis.
+The biggest limitation is the market-value data itself.
 
-- Market values are estimates rather than actual transfer prices and may not represent the price at which a club would be willing to sell a player.
-- Performance and market-value data come from different dataset snapshots, so the valuation date may not perfectly align with the end of the 2025/26 performance period.
-- The analysis uses a broad forward classification. Centre-forwards, wide forwards and hybrid attacking players can have substantially different tactical roles.
-- Players classified primarily as midfielders were excluded even if they also played significant minutes as forwards.
-- The model only considers attacking output, age, league and minutes. It does not account for contract length, wages, injury history, physical attributes, defensive contribution or tactical fit.
-- Performance is not adjusted for team strength, possession, tactical system or quality of teammates.
-- The regression is fitted and evaluated on the same 85-player sample. The residuals are therefore used as a descriptive measure of relative valuation rather than evidence of out-of-sample predictive accuracy.
-- The 60/40 weighting and the decision to square the performance percentile are modelling choices rather than objectively correct weights.
-- Matching players across separate data sources is imperfect, and a small number of eligible players could not be assigned a usable market value.
+Market values are estimates rather than actual transfer prices. A player listed at €15m might eventually move for substantially more or less depending on their contract situation, the finances of the selling club, the number of interested buyers and how willing that club is to sell. The model is therefore partly explaining how players are valued by the data provider rather than directly estimating what another club would actually have to pay.
 
-For these reasons, the ranking is best interpreted as a way of identifying players for further analysis rather than as a complete scouting or transfer valuation system.
+This is particularly important when looking at large gaps between actual and model-implied values. Carlos Espí's €21.6m model estimate, for example, should not be interpreted as evidence that he could definitely be sold for that amount. It is much more useful as an indication that his €2.7m listed value looks unusually low relative to the rest of the sample.
+
+The timing of the valuations is another limitation. The performance data covers the full 2025/26 season, while the market values come from a separate dataset snapshot, so the two do not necessarily represent exactly the same point in time.
+
+The positional filter is deliberately strict as well. Limiting the sample to players listed primarily as forwards keeps the comparison cleaner, but it inevitably leaves out some interesting attackers. **Pablo Pagis at Paris FC** is one example. His `MF,FW` classification excludes him from the model, despite his raw attacking numbers making him someone I would still want to investigate separately. Players like that are a good reminder that a positional label should not completely replace looking at the underlying data.
+
+There is also a lot the model does not know. Contract length, wages, injuries, physical attributes, defensive contribution, pressing, tactical role and suitability for a particular team can all materially affect how attractive a player actually is.
+
+Team context is another factor. A forward playing for a dominant side may naturally receive more chances and spend far more time around the opposition penalty area than someone playing for a weaker team.
+
+Finally, the **60/40 weighting** is a modelling choice rather than an objectively correct formula. I chose it because I wanted attacking performance to matter more than simply being cheap. A different analyst could reasonably place more or less emphasis on either side.
+
+
+## Final thoughts
+
+The main thing I took from the project is that there is no single type of value player.
+
+Carlos Espí stands out because his valuation is extremely low relative to his age and production. Šulc and Matanović offer a more balanced combination of strong performance and affordability. Diomandé and El Mala are already expensive, but their output is strong enough that they still compare favourably with their current valuations.
+
+That is closer to what I wanted the model to do than simply producing a list of cheap forwards.
+
+The ranking gives me a smaller group of players who look interesting for different reasons. From there, the sensible next step would be to look more closely at the individual players, their roles, the context behind their numbers and whether their style would actually suit the club looking at them.
+
+
+## Data and code
+
+Full-season performance data was taken from the [Top 5 Football Dataset](https://github.com/m-mahadi/top5-football-dataset), with SofaScore metrics used consistently for the attacking analysis.
+
+Market values came from a separate SofaScore-derived player profile dataset.
+
+The analysis was completed in **R**, with **ggplot2** and **ggrepel** used for the visualisations. The full R script and final ranking data are included in this repository.
+
+
+
