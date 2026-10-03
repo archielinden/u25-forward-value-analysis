@@ -44,28 +44,23 @@ I used a linear regression based on:
 
 Market value was log-transformed because football valuations are heavily skewed. Most players sit towards the lower end of the market, while a much smaller number are worth tens of millions more.
 
-The model explained **62.5% of the variation in log market values**, meaning that performance, age, league and minutes together accounted for a substantial share of the differences in valuations across the sample. This should not be interpreted as 62.5% predictive accuracy, but it suggests the model captures a meaningful part of how players are valued.
+The model explained **62.5% of the variation in log market values**, meaning these factors accounted for a substantial share of the differences in valuation across the 85-player sample.
 
-The individual results were broadly intuitive. Better attacking performance was associated with higher valuations, while younger players tended to carry a premium within the U25 sample. The clearest league effect came from the **Premier League**, where comparable players carried substantially higher valuations. That is not particularly surprising given its financial strength and its reputation as one of the strongest and most competitive domestic leagues in world football.
+The results made sense. Stronger attacking performances were generally linked with higher values, younger players tended to carry a premium, and the clearest league effect, as one may have guessed, came from the **Premier League**, where comparable players were valued much more highly.
 
 I then used the regression as a benchmark rather than treating its estimate as a player's "true" value. The interesting players were those whose actual market value sat below what the model would normally expect from a similar profile.
 
-
 ## From undervaluation to a final ranking
 
-There was one problem with simply ranking the regression residuals.
+Ranking players purely by model-implied undervaluation created a problem. Some cheaper players appeared highly undervalued even when their attacking performance was only average.
 
-Some relatively weak performers looked heavily undervalued because their market values were particularly low. Mathematically that made sense, but it was not really what I wanted from a recruitment shortlist. Being cheap is not particularly useful if the attacking performance is not strong enough in the first place.
-
-I therefore converted both attacking performance and model-implied undervaluation into percentile rankings and combined them into a final score:
+To avoid that, I combined both sides of the analysis into one final score:
 
 **60% attacking performance + 40% model-implied undervaluation**
 
-The performance percentile was squared before entering the score. This gives extra weight to players towards the top of the attacking distribution, rather than treating the difference between the 90th and 80th percentile in the same way as the difference between the 50th and 40th.
+The performance percentile was squared before entering the score, giving extra weight to players towards the top of the attacking distribution rather than treating every step up the ranking equally.
 
-Only players whose actual value was below the level implied by the regression were eligible for the final shortlist.
-
-The 60/40 split is ultimately a modelling choice, but I fixed it before looking at the final rankings rather than changing the weights afterwards to produce particular players.
+Only players whose actual market value was below the regression estimate were included. The 60/40 weighting was deliberately tilted towards performance and fixed before viewing the final ranking.
 
 ## Results
 
