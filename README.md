@@ -1,26 +1,18 @@
 # U25 Forward Value Analysis
 
-## Identifying Value Among U25 Forwards
-
 Which U25 forwards in Europe’s top five leagues offer the strongest attacking performance relative to their market value?
 
-That sounds simple, but there are two different things to consider. A player can be cheap without actually representing particularly good value, while an already expensive player could still look undervalued if their performances justify an even higher valuation.
+A cheap player is not automatically good value, and an expensive player is not necessarily overpriced. I wanted to identify forwards whose attacking output looked strong relative to the value attached to them.
 
-I wanted to build a model that considered both sides. The aim was not to decide who a club should sign, but to narrow a large group of young forwards into players whose performances and current valuations made them worth looking at more closely.
+The aim was to build a simple screening model that could narrow a large group of young forwards into a smaller set worth looking at more closely, rather than trying to decide outright who a club should sign.
 
-
-## Building the Sample
+## Building the sample
 
 The analysis uses full-season 2025/26 data from the Premier League, LaLiga, Bundesliga, Serie A and Ligue 1.
 
-I restricted the sample to players under 25 who played at least 900 minutes. This removes players whose numbers were built on very small samples while still allowing younger players who were not necessarily guaranteed starters to be included.
+I restricted the sample to players who were under 25 at the start of the season and played at least 900 league minutes. Players classified primarily as forwards (`FW` or `FW,MF`) were included, while `MF,FW` players were excluded.
 
-I also limited the analysis to players whose primary position was listed as forward. Players classified as `FW` or `FW,MF` were included, while players listed as `MF,FW` were excluded.
-
-This is useful for keeping the sample consistent, although it inevitably leaves out a few interesting players. Pablo Pagis, who recently earned a move to Paris FC is a good example. He was classified primarily as a midfielder and therefore falls outside the model, but his raw attacking numbers still make him someone I would want to look at separately. Cases like this are a useful reminder that a positional label should not completely replace actually looking at the player.
-
-After matching the performance data to the market-value data and removing players without usable valuations, the final sample contained **85 players**.
-
+After matching the performance data to market values and removing players without usable valuations, the final sample contained **85 players**.
 
 ## Measuring Attacking Performance
 
@@ -35,10 +27,9 @@ Six attacking measures were used:
 - Shots per 90
 - Shot accuracy
 
-Each metric was standardised relative to the other 84 players in the sample. They were then split into three areas: scoring, creation and shooting. **Scoring** combines goals and expected goals, **creation** combines assists and expected assists, while **shooting** combines shot volume and shot accuracy. The three components were weighted equally to produce one overall **Attacking Performance Score**.
+Each metric was standardised relative to the other 84 players in the sample, then grouped into three areas. **Scoring** combined goals and expected goals, **creation** combined assists and expected assists, while **shooting** combined shot volume and shot accuracy. The three components were weighted equally to produce one overall **Attacking Performance Score**.
 
-Using expected as well as actual output is important here. Eleven goals can come from consistently getting into good shooting positions or from an unusually strong run of finishing. Including xG helps distinguish between the two, while the creation and shooting components prevent the score from being entirely centred around goals.
-
+Using expected as well as actual output gives a broader picture than goals alone. Two players can finish with the same goal total but have got there in very different ways, so including xG, chance creation and shooting volume helps separate repeatable attacking output from a hot finishing run.
 
 ## Estimating Market Value
 
