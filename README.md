@@ -1,5 +1,7 @@
 # U25 Forward Value Analysis
 
+<img src="player-shooting-ball.jpg" alt="Football forward in match action" width="100%">
+
 Which U25 forwards in Europe’s top five leagues offered the strongest attacking performance relative to their market value in 2025/26?
 
 A cheap player is not automatically good value, and an expensive player is not necessarily overpriced. I wanted to identify forwards whose attacking output looked strong relative to the value attached to them.
