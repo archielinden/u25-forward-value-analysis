@@ -1,6 +1,6 @@
 # U25 Forward Value Analysis
 
-Which U25 forwards in Europe’s top five leagues offered the strongest attacking performance relative to their market value last season?
+Which U25 forwards in Europe’s top five leagues offered the strongest attacking performance relative to their market value in 2025/26?
 
 A cheap player is not automatically good value, and an expensive player is not necessarily overpriced. I wanted to identify forwards whose attacking output looked strong relative to the value attached to them.
 
@@ -88,7 +88,7 @@ Combining attacking performance with model-implied undervaluation produced the f
 
 **Pavel Šulc ranked first overall**, with 11 goals and 3 assists in 1,568 league minutes. The hybrid forward sat in the 89th percentile for attacking performance,  playing an instrumental role in Lyon's fourth-place finish despite the club operating under serious financial pressure.
 
-**Carlos Espí** finished second after scoring 11 LaLiga goals in 1,350 minutes at just 20 years old, while carrying one of the lowest valuations in the sample. At the other end of the price range, **Yan Diomande**, **Benjamin Šeško** and **Said El Mala** still ranked near the top despite already being highly valued, showing that exceptional attacking output could outweigh a higher starting price. Šeško's third-place ranking may raise a few eyebrows, but his raw totals hide how strong his output was on a per-90 basis, with 11 goals and an assist coming in only 1,635 league minutes.
+**Carlos Espí** finished second after scoring 11 LaLiga goals for Levante in 1,350 minutes at just 20 years old, while carrying one of the lowest valuations in the sample. At the other end of the price range, **Yan Diomande**, **Benjamin Šeško** and **Said El Mala** still ranked near the top despite already being highly valued, showing that exceptional attacking output could outweigh a higher starting price. Šeško's third-place ranking may raise a few eyebrows, but his raw totals hide how strong his output was on a per-90 basis, with 11 goals and an assist coming in only 1,635  Premier League minutes.
 
 ### The shortlist
 
@@ -116,7 +116,7 @@ The ranking itself only tells part of the story. Looking at the players in more 
 
 **Yan Diomande** is impossible to ignore. He produced 12 goals and eight assists at just 18 years old and still finished fifth despite already carrying one of the highest valuations in the sample. His rise has been remarkable, going from high-school football in the United States to Real Madrid in roughly two years, with Madrid eventually paying €125m plus a possible €15m in add-ons. He is no longer an undiscovered player, but his 2025/26 output explains why his reputation has risen so quickly.
 
-**Carlos Espí** also earned a move to Los Blancos after they paid his €25m release clause. He's already showed his value early on with 2 late winners and is worth keeping an eye on. 
+**Carlos Espí** also earned a move to Los Blancos after they paid his €25m release clause. He's already made an early impact with two late winners in La Liga and looks like an exciting name to follow from the shortlist.   
 
 **Igor Matanović** is another player I would be particularly interested in following. His 11 goals and two assists came in only 1,570 league minutes, helping him finish fourth in the ranking. He remained at Freiburg over the summer and has since started 2026/27 with three goals and an assist in his first four Bundesliga appearances.
 
@@ -132,11 +132,11 @@ Even an accurate market value would still not be the same as the price required 
 
 Attacking numbers also depend heavily on context. A forward in a dominant side may receive more chances, touches and possession than somebody producing similar numbers in a weaker team, while tactical role can also change what good performance looks like.
 
-Finally, the performance score only captures part of a player's attacking game. Metrics such as pressing data, touches in the penalty area and shot-creating actions could add more detail, while the data used here says little about physical qualities, defensive work, injuries, tactical fit, mentality or future development.
+The performance score only captures part of a player's attacking game. Metrics such as pressing data, touches in the penalty area and shot-creating actions could add more detail, while the data used here says little about physical qualities, defensive work, injuries, tactical fit, mentality or future development.
 
 Finally, the **60/40 weighting** is a modelling choice rather than an objectively correct formula. I chose it because I wanted attacking performance to matter more than simply being cheap. A different analyst could reasonably place more or less emphasis on either side.
 
-## Final thoughts - From data to recruitment
+## From data to recruitment
 
 This is still a relatively simple analysis of young forwards. It uses a limited set of attacking metrics and cannot capture everything that determines whether a player will succeed at a new club. Even so, it provides a useful foundation for identifying players worth investigating further.
 
