@@ -68,65 +68,61 @@ Only players whose actual market value was below the regression estimate were in
 
 ![Attacking Performance vs Market Value](performance_vs_market_value.png)
 
-The first graph shows the trade-off I was looking for. Players further to the right produced stronger attacking performances, while those lower down had lower market values. The most interesting area is therefore broadly towards the lower-right, where strong output meets a relatively low valuation.
+The first graph compares attacking performance with market value, with the most interesting players generally sitting towards the lower-right.
 
-Carlos Espí and Igor Matanović stand out immediately on that basis, while Pavel Šulc also combines strong attacking numbers with a much lower valuation than several players around him. At the other end, Yan Diomandé and Said El Mala were among the strongest performers in the entire sample, but already carried much higher market values.
-
-This is useful as a first look, but price and performance alone do not tell the whole story. A €20m player in one league or at one age may not be directly comparable with a €20m player elsewhere, which is where the market-value model becomes more useful.
-
+Carlos Espí and Igor Matanović stand out immediately, combining strong attacking scores with valuations of just €2.7m and €6.8m respectively. Pavel Šulc offers a similar balance at €12.4m, while Yan Diomandé and Said El Mala sit among the strongest performers in the sample but already carry much higher valuations.
 
 ### Who looks undervalued?
 
 ![Actual vs Model-Predicted Market Value](actual_vs_predicted_market_value.png)
 
-The second graph compares each player's actual market value with the value implied by the regression. Players above the dashed line are valued below the level expected by the model, while players below it are valued above it.
+The regression strengthens some of the initial signals. Carlos Espí is the clearest outlier, while Matanović, Šulc and several other lower-valued players also sit well above the line, indicating that their market values were below what the model expected.
 
-Carlos Espí is the clearest example. His listed value is extremely low relative to what the model would expect from a player of his age, playing time and attacking output. Matanović, Šulc and several of the lower-cost forwards also sit noticeably above the line.
+However, undervaluation alone can still reward players simply for being cheap, which is why it was combined with attacking performance for the final ranking.
 
-Importantly, though, being a long way above the line does not automatically make someone one of the strongest options. A player can look heavily undervalued partly because they are very cheap, even if their attacking performance is only average. That is why I did not use the regression residual alone for the final ranking.
+### Final value ranking
 
+![Top 15 Value Ranking](top15_value_ranking.png)
 
-### Bringing performance and value together
+Combining attacking performance with model-implied undervaluation produced the final shortlist.
 
-![Top 15 U25 Forward Value Rankings](top15_value_ranking.png)
+**Pavel Šulc ranked first overall**, with 11 goals and 3 assists in 1,568 league minutes. He sat in the 89th percentile for attacking performance, while his €12.4m market value was well below the €23.4m estimated by the model.
 
-Once attacking performance and model-implied undervaluation are combined, **Pavel Šulc comes out on top**.
+**Carlos Espí finished second**, scoring 11 goals in 1,350 minutes at just 20 years old. His €2.7m market value was particularly striking, with the model estimating a value of €21.6m.
 
-He scored 11 league goals in only 1,568 minutes and ranked around the 89th percentile for attacking performance, while his €12.4m market value remained well below the €23.4m level implied by the model. He did not rank first because of one particularly extreme metric, but because he performed strongly on both sides of the analysis.
+Further down the ranking, **Igor Matanović** also combined strong output with a low valuation, while **Christian Kofane** ranked highly despite having fewer headline goals. At the other end of the price range, **Benjamin Šeško, Yan Diomandé and Said El Mala** still featured strongly despite already carrying much higher market values, showing that the ranking was not simply favouring the cheapest players.
 
-**Carlos Espí finishes narrowly behind him** and is probably the most striking low-cost name in the results. At 20 years old he scored 11 goals in 1,350 minutes, around 0.73 goals per 90, while carrying a listed value of only €2.7m. The €21.6m model estimate should not be read as a literal transfer fee, but the size of the gap shows how unusual his combination of age, output and valuation was within the sample.
+### The shortlist
 
-**Igor Matanović** offers a similar profile. He also scored 11 goals, doing so in 1,570 minutes, while being valued at €6.8m. Strong scoring and expected-goal numbers combined with that relatively low price pushed him to fourth overall.
+The final ranking produced a mix of players at very different stages of their careers. Some were already highly rated, while others were much less established when the analysis was carried out.
 
-The ranking also shows why this is not simply a bargain-hunting model. **Benjamin Šeško, Yan Diomandé and Said El Mala** already have high valuations, but their attacking output was strong enough for them to remain near the top. Diomandé scored 12 league goals and El Mala 13, despite both being only 18.
+| Rank | Player | Age | 25/26 League | 25/26 G+A | Summer 2026 |
+|---|---|---:|---|---:|---|
+| 1 | Pavel Šulc | 25 | Ligue 1 | 14 | Wrexham bid rejected |
+| 2 | Carlos Espí | 21 | LaLiga | 11 | Real Madrid — €25m |
+| 3 | Benjamin Šeško | 23 | Premier League | 12 | — |
+| 4 | Igor Matanović | 23 | Bundesliga | 13 | — |
+| 5 | Yan Diomande | 19 | Bundesliga | 20 | Real Madrid — £106m + add-ons |
+| 6 | Said El Mala | 20 | Bundesliga | 17 | Dortmund bid rejected; new Köln deal |
+| 7 | Christian Kofane | 20 | Bundesliga | 9 | Arsenal interest |
+| 8 | Sambou Soumano | 25 | Ligue 1 | 6 | Reims — free transfer |
+| 9 | Joaquín Panichelli | 23 | Ligue 1 | 17 | — |
+| 10 | Folarin Balogun | 25 | Ligue 1 | 17 | £40m Everton move collapsed |
+| 11 | Igor Thiago | 25 | Premier League | 23 | — |
+| 12 | Dženan Pejčinović | 21 | Bundesliga | 8 | Stuttgart — €25m |
+| 13 | Álvaro Rodríguez | 22 | LaLiga | 12 | Bournemouth — €25m + €5m add-ons |
+| 14 | Emersonn | 22 | Ligue 1 | 8 | Ipswich — around £24m |
+| 15 | Gift Orban | 24 | Serie A | 9 | Amedspor — loan |
+ 
+*Age shown as of October 2026. Every player was under 25 at the start of the 2025/26 season.*
 
-Further down, **Joaquín Panichelli scored 16 league goals**, while **Igor Thiago scored 22**, the highest total among the final top 15. Thiago was already valued at €52m, but his performance was strong enough for the model to still view that as relatively low compared with his profile.
+**Yan Diomande is one of the players who stands out most from the shortlist.** At only 18 at the start of the season, he produced 12 goals and eight assists and ranked fifth despite already carrying one of the highest market values in the sample. His subsequent move from Leipzig to Real Madrid for a fee well above £100m reinforces just how highly his combination of age and output was viewed. Carlos Espí reached the same club from a very different starting point, having scored 11 league goals while carrying one of the lowest valuations in the original sample.
 
-The final ranking therefore contains a few different types of player. Some stand out because they combine strong output with a genuinely low valuation, while others are already expensive but still look relatively well priced given how well they performed.
+**Igor Matanović is another player I would be particularly interested in following.** His 11 goals and two assists came in only 1,570 league minutes, helping him finish fourth in the ranking. He remained at Freiburg over the summer and has since started 2026/27 with three goals and an assist in his first four Bundesliga appearances.
 
+**Joaquín Panichelli also needs some context beyond his final ranking.** He had reached 16 Ligue 1 goals and was leading the league's scoring chart when an ACL injury ended his season in March. His return from injury therefore makes him one of the more interesting players on the list to revisit.
 
-## Final top 15
-
-| Rank | Player | Age | League | Goals | Market Value | Model Value |
-|---|---|---:|---|---:|---:|---:|
-| 1 | Pavel Šulc | 24 | Ligue 1 | 11 | €12.4m | €23.4m |
-| 2 | Carlos Espí | 20 | LaLiga | 11 | €2.7m | €21.6m |
-| 3 | Benjamin Šeško | 22 | Premier League | 11 | €68.0m | €111.1m |
-| 4 | Igor Matanović | 22 | Bundesliga | 11 | €6.8m | €22.6m |
-| 5 | Yan Diomandé | 18 | Bundesliga | 12 | €49.0m | €61.5m |
-| 6 | Said El Mala | 18 | Bundesliga | 13 | €41.0m | €50.0m |
-| 7 | Christian Kofane | 19 | Bundesliga | 5 | €23.0m | €31.5m |
-| 8 | Sambou Soumano | 24 | Ligue 1 | 4 | €4.2m | €14.3m |
-| 9 | Joaquín Panichelli | 22 | Ligue 1 | 16 | €23.0m | €30.8m |
-| 10 | Folarin Balogun | 24 | Ligue 1 | 13 | €20.0m | €25.1m |
-| 11 | Igor Thiago | 24 | Premier League | 22 | €52.0m | €92.2m |
-| 12 | Dženan Pejčinović | 20 | Bundesliga | 8 | €6.6m | €19.7m |
-| 13 | Álvaro Rodríguez | 21 | LaLiga | 7 | €4.6m | €15.6m |
-| 14 | Emersonn | 21 | Ligue 1 | 6 | €3.9m | €19.0m |
-| 15 | Gift Orban | 23 | Serie A | 7 | €8.9m | €19.9m |
-
-The model values shown here are best treated as reference points rather than suggested transfer fees. Their purpose is to show the level at which the regression would expect a player with that profile to be valued.
-
+There has also been significant movement elsewhere in the shortlist. Pejčinović, Álvaro Rodríguez and Emersonn all earned substantial transfers, while El Mala, Kofane and Balogun attracted serious interest without ultimately moving. That does not validate every part of the model, but it is encouraging that so many of the players highlighted by the analysis have since attracted attention at a much higher level.
 
 ## How does it compare with the real market?
 
