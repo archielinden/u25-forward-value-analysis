@@ -48,7 +48,7 @@ Market value was log-transformed because football valuations are heavily skewed.
 
 The model explained **62.5% of the variation in log market values**, meaning these factors accounted for a substantial share of the differences in valuation across the 85-player sample.
 
-The results made sense. Stronger attacking performances were generally linked with higher values, younger players tended to carry a premium, and the clearest league effect, as one may have guessed, came from the **Premier League**, where comparable players were valued much more highly.
+The results made sense. Stronger attacking performances were generally linked with higher values, younger players tended to carry a premium, and the clearest league effect, unsurprisingly, came from the **Premier League**, where comparable players were valued much more highly.
 
 I then used the regression as a benchmark rather than treating its estimate as a player's "true" value. The interesting players were those whose actual market value sat below what the model would normally expect from a similar profile.
 
@@ -88,9 +88,9 @@ However, undervaluation alone can still reward players simply for being cheap, w
 
 Combining attacking performance with model-implied undervaluation produced the final shortlist.
 
-**Pavel Šulc ranked first overall**, with 11 goals and 3 assists in 1,568 league minutes. The hybrid forward sat in the 89th percentile for attacking performance,  playing an instrumental role in Lyon's fourth-place finish despite the club operating under serious financial pressure.
+**Pavel Šulc ranked first overall**, with 11 goals and 3 assists in 1,568 league minutes. The hybrid forward sat in the 89th percentile for attacking performance, playing an instrumental role in Lyon's fourth-place finish despite the club operating under serious financial pressure.
 
-**Carlos Espí** finished second after scoring 11 LaLiga goals for Levante in 1,350 minutes at just 20 years old, while carrying one of the lowest valuations in the sample. At the other end of the price range, **Yan Diomande**, **Benjamin Šeško** and **Said El Mala** still ranked near the top despite already being highly valued, showing that exceptional attacking output could outweigh a higher starting price. Šeško's third-place ranking may raise a few eyebrows, but his raw totals hide how strong his output was on a per-90 basis, with 11 goals and an assist coming in only 1,635  Premier League minutes.
+**Carlos Espí** finished second after scoring 11 LaLiga goals for Levante in 1,350 minutes at just 20 years old, while carrying one of the lowest valuations in the sample. At the other end of the price range, **Yan Diomande**, **Benjamin Šeško** and **Said El Mala** still ranked near the top despite already being highly valued, showing that exceptional attacking output could outweigh a higher starting price. Šeško's third-place ranking may raise a few eyebrows, but his raw totals hide how strong his output was on a per-90 basis, with 11 goals and an assist coming in only 1,635 Premier League minutes.
 
 ### The shortlist
 
@@ -122,7 +122,7 @@ The ranking itself only tells part of the story. Looking at the players in more 
 
 **Igor Matanović** is another player I would be particularly interested in following. His 11 goals and two assists came in only 1,570 league minutes, helping him finish fourth in the ranking. He remained at Freiburg over the summer and has since started 2026/27 with three goals and an assist in his first four Bundesliga appearances.
 
-**Joaquín Panichelli also needs some context beyond his final ranking.** He had reached 16 Ligue 1 goals and was leading the league's scoring chart when an ACL injury ended his season in March. His return from injury therefore makes him one of the more interesting players on the list to revisit.
+**Joaquín Panichelli** also needs some context beyond his final ranking. He had reached 16 Ligue 1 goals and was leading the league's scoring chart when an ACL injury ended his season in March. His return from injury therefore makes him one of the more interesting players on the list to revisit.
 
 There has also been significant movement elsewhere in the shortlist. Pejčinović, Álvaro Rodríguez and Emersonn all earned substantial transfers, while El Mala, Kofane and Balogun attracted serious interest without ultimately moving. That does not validate every part of the model, but it is encouraging that so many of the players highlighted by the analysis have since attracted attention at a much higher level.
 
