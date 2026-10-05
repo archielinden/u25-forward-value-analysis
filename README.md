@@ -156,7 +156,7 @@ Full-season performance data was taken from the [Top 5 Football Dataset](https:/
 
 Market values came from a separate SofaScore-derived player profile dataset.
 
-The analysis was completed in **R**, with **ggplot2** and **ggrepel** used for the visualisations. The full R script and final ranking data are included in this repository.
+The analysis was completed in **R**, with **ggplot2** and **ggrepel** used for the visualisations. The full R script used for the analysis is included in this repository, alongside the final top-15 ranking and visualisations.
 
 
 
